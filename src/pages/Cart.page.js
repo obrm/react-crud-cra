@@ -1,6 +1,15 @@
 import { CartItem } from '../components';
 
-const Cart = ({ cart, total, clearCart }) => {
+const Cart = ({ cart, setCart }) => {
+
+  const handleClearCart = () => { };
+
+  const total = 0;
+
+  const getCartItems = () => {
+    const cartItems = cart.map((product) => product.id);
+  }
+
   if (cart.length === 0) {
     return (
       <section className='cart'>
@@ -28,7 +37,7 @@ const Cart = ({ cart, total, clearCart }) => {
             סך הכל <span>{total} ש"ח</span>
           </h4>
         </div>
-        <button className='btn clear-btn' onClick={clearCart}>
+        <button className='btn clear-btn' onClick={handleClearCart}>
           הסרת כל המוצרים
         </button>
       </footer>
