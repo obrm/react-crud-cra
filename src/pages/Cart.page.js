@@ -1,14 +1,17 @@
-import { formatNumber } from './../utils/index';
+import { calcAndFormatPrice } from './../utils/index';
 
 import { CartItem } from '../components';
+import { setItem } from './../services/localStorageService';
 
 const Cart = ({ cart, setCart }) => {
-  const handleClearCart = () => { };
-  let total = cart && cart.map((product) => (product.price * 3.5) * 1.17 * product.qty).reduce((acc, cur) => acc + cur, 0); 
+  const handleClearCart = () => {
+    setCart([]);
+    setItem('cart', []);
+  };
 
-  total = formatNumber(total);
+  let total = cart && cart.map((product) => product.price * product.qty).reduce((acc, cur) => acc + cur, 0); 
 
-  console.log(total)
+  total = calcAndFormatPrice(total);
 
   if (cart.length === 0) {
     return (
@@ -27,7 +30,7 @@ const Cart = ({ cart, setCart }) => {
       </header>
       <div>
         {cart.map((item) => {
-          return <CartItem key={item.id} {...item} />;
+          return <CartItem key={item.id} {...item} cart={cart} setCart={setCart} />;
         })}
       </div>
       <footer>

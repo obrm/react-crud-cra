@@ -5,7 +5,7 @@ import { Container } from 'react-bootstrap';
 import api from './api/api';
 import { getItem, setItem } from './services/localStorageService';
 
-import { SharedLayout, Home, Product, Cart, NotFound, SharedProductLayout } from './pages';
+import { SharedLayout, Home, Product, EditProduct, Cart, NotFound, SharedProductLayout } from './pages';
 
 function App() {
   const [cart, setCart] = useState([]);
@@ -60,7 +60,7 @@ function App() {
     <Router>
       <Container>
         <Routes>
-          <Route path='/' element={<SharedLayout />}>
+          <Route path='/' element={<SharedLayout cart={cart} />}>
             <Route
               index
               element={<Home
@@ -73,6 +73,7 @@ function App() {
 
             <Route path='products' element={<SharedProductLayout />}>
               <Route path=':productId' element={<Product cart={cart} setCart={setCart} />} />
+              <Route path=':productId/edit' element={<EditProduct />} />
             </Route>
 
             <Route path='*' element={<NotFound />} />

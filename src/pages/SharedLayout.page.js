@@ -2,10 +2,10 @@ import { Outlet } from 'react-router-dom';
 
 import { Header } from './../components';
 
-const SharedLayout = () => {
+const SharedLayout = ({ cart }) => {
   return (
     <>
-      <Header />
+      <Header cart={cart} />
       <Outlet />
     </>
   );

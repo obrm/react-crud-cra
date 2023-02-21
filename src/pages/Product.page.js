@@ -9,7 +9,7 @@ import { Spinner } from '../components/layout';
 import { AddToCartBtn, Message } from '../components';
 
 const Product = ({ setCart, cart }) => {
-  const [product, setProduct] = useState(null)
+  const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState({
     isError: false,
@@ -39,6 +39,22 @@ const Product = ({ setCart, cart }) => {
     getProduct();
   }, [productId]);
 
+  const handleDelete = async () => {
+    try {
+      await api.delete(`/products/${product.id}`);
+      navigate('/');
+    } catch (error) {
+      console.error(error);
+      setError({
+        isError: true,
+        message: error.message
+      });
+    }
+  };
+
+  const handleEdit = async () => {
+    navigate(`/products/${product.id}/edit`);
+  };
 
   const price = product && calcAndFormatPrice(product.price);
 
@@ -59,12 +75,20 @@ const Product = ({ setCart, cart }) => {
           <Row>
                 <Col md={12}>
                   <Image src={product.thumbnail} alt={product.name} fluid />
-                </Col>            
+                </Col>
             <Col md={3}>
               <Card>
                 <ListGroup variant='flush'>
                   <ListGroup.Item>
                     <Row>
+                          <Col>שם:</Col>
+                          <Col>
+                            <strong>
+                              {product.title}
+                            </strong>
+                          </Col>
+                        </Row>
+                        <Row>
                       <Col>מחיר:</Col>
                       <Col>
                         <strong
@@ -88,6 +112,12 @@ const Product = ({ setCart, cart }) => {
                           disabled={product.stock === 0}
                           cart={cart} setCart={setCart} id={product.id} />
                   </ListGroup.Item>
+                      <ListGroup.Item>
+                        <Button variant="danger" onClick={handleDelete}>מחק מוצר</Button>
+                      </ListGroup.Item>
+                      <ListGroup.Item>
+                        <Button onClick={handleEdit}>ערוך מוצר</Button>
+                      </ListGroup.Item>
                 </ListGroup>
               </Card>
             </Col>
