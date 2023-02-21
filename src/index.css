@@ -676,3 +676,11 @@ hr {
   border-color: transparent;
   border-width: 0.25px;
 }
+
+.navbar-nav a {
+  padding: 1rem;
+}
+
+.navbar-nav a.is-active {
+  font-weight: 900;
+}

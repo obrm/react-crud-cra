@@ -1,20 +1,13 @@
-import { useState, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Row, Col, Form, Button } from 'react-bootstrap';
 
 import api from './../api/api';
 
-import { Spinner } from '../components/layout';
 import { Message } from '../components';
 
-const EditProduct = () => {
-  const { productId } = useParams();
-  const [product, setProduct] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState({
-    isError: false,
-    message: ''
-  });
+const AddProduct = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     title: '',
     price: '',
@@ -22,34 +15,10 @@ const EditProduct = () => {
     thumbnail: '',
     description: ''
   });
-
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    const getProduct = async () => {
-      try {
-        const response = await api.get(`/products/${productId}`);
-        setProduct(response.data);
-        setFormData({
-          title: response.data.title,
-          price: response.data.price,
-          stock: response.data.stock,
-          thumbnail: response.data.thumbnail,
-          description: response.data.description
-        });
-      } catch (error) {
-        console.error(error);
-        setError({
-          isError: true,
-          message: error.message
-        });
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    getProduct();
-  }, [productId]);
+  const [error, setError] = useState({
+    isError: false,
+    message: ''
+  });
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -59,15 +28,11 @@ const EditProduct = () => {
     });
   };
 
-  const handleCancel = () => {
-    navigate(`/products/${product.id}`);
-  };
-
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      await api.put(`/products/${productId}`, formData);
-      navigate(`/products/${productId}`);
+      await api.post('/products/add', formData);
+      navigate('/');
     } catch (error) {
       console.error(error);
       setError({
@@ -76,18 +41,6 @@ const EditProduct = () => {
       });
     }
   };
-
-  if (loading) {
-    return <Spinner />;
-  }
-
-  if (error.isError) {
-    return (
-      <Message variant='danger' dismissible={false}>
-        {error.message}
-      </Message>
-    );
-  }
 
   return (
     <>
@@ -103,7 +56,7 @@ const EditProduct = () => {
               <Form.Control
                 type='text'
                 name='name'
-                value={formData.name}
+                value={formData.title}
                 onChange={handleChange}
               />
             </Form.Group>
@@ -137,6 +90,7 @@ const EditProduct = () => {
                 onChange={handleChange}
               />
             </Form.Group>
+
             <Form.Group controlId='formDescription'>
               <Form.Label>תיאור:</Form.Label>
               <Form.Control
@@ -148,11 +102,14 @@ const EditProduct = () => {
               />
             </Form.Group>
 
-            <Button variant='secondary' onClick={handleCancel} className='mr-2'>
-              בטל
-            </Button>
+            {error.isError && (
+              <Message variant='danger' dismissible={false}>
+                {error.message}
+              </Message>
+            )}
+
             <Button variant='primary' type='submit'>
-              שמור שינויים
+              הוסף מוצר
             </Button>
           </Form>
         </Col>
@@ -161,4 +118,4 @@ const EditProduct = () => {
   );
 };
 
-export default EditProduct;
+export default AddProduct;

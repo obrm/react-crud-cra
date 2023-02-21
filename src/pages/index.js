@@ -6,5 +6,6 @@ import SharedLayout from './SharedLayout.page';
 import NotFound from './NotFound.page';
 import SharedProductLayout from './SharedProductLayout.page';
 import EditProduct from './EditProduct.page';
+import AddProduct from './AddProduct.page';
 
-export { Home, Product, EditProduct, Cart, SharedLayout, SharedProductLayout, NotFound };
+export { Home, Product, AddProduct, EditProduct, Cart, SharedLayout, SharedProductLayout, NotFound };
