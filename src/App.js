@@ -1,12 +1,10 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
-import { Header } from "./components";
 import { SharedLayout, Home, Product, Cart, NotFound, SharedProductLayout } from './pages';
 
 function App() {
   return (
     <Router>
-      <Header />
       <Routes>
         <Route path='/' element={<SharedLayout />}>
           <Route index element={<Home />} />
