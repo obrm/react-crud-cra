@@ -1,14 +1,14 @@
+import { formatNumber } from './../utils/index';
+
 import { CartItem } from '../components';
 
 const Cart = ({ cart, setCart }) => {
-
   const handleClearCart = () => { };
+  let total = cart && cart.map((product) => (product.price * 3.5) * 1.17 * product.qty).reduce((acc, cur) => acc + cur, 0); 
 
-  const total = 0;
+  total = formatNumber(total);
 
-  const getCartItems = () => {
-    const cartItems = cart.map((product) => product.id);
-  }
+  console.log(total)
 
   if (cart.length === 0) {
     return (

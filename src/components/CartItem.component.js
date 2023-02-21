@@ -1,15 +1,20 @@
-const CartItem = ({ id, img, title, price, amount, remove, toggleAmount }) => {
+import { Button } from 'react-bootstrap';
+
+import { calcAndFormatPrice } from './../utils/index';
+
+const CartItem = ({ thumbnail, name, price, qty, id, remove, toggleAmount }) => {
+  const calculatedPrice = calcAndFormatPrice(price * qty);
 
   return (
-    <article className='cart-item'>
-      <img src={img} alt={title} />
+    <article className='cart-item' dir='rtl'>
+      <img src={thumbnail} alt={name} />
       <div>
-        <h4>{title}</h4>
-        <h4 className='item-price'>${price}</h4>
-        {/* remove button */}
-        <button className='remove-btn' onClick={() => remove(id)}>
-          remove
-        </button>
+        <h4>{name}</h4>
+        <h4 className='item-price'>{calculatedPrice} ש"ח</h4>
+        {/* remove Button */}
+        <Button onClick={() => remove(id)}>
+          הסר
+        </Button>
       </div>
       <div>
         {/* increase amount */}
@@ -19,7 +24,7 @@ const CartItem = ({ id, img, title, price, amount, remove, toggleAmount }) => {
           </svg>
         </button>
         {/* amount */}
-        <p className='amount'>{amount}</p>
+        <p className='amount'>{qty}</p>
         {/* decrease amount */}
         <button className='amount-btn' onClick={() => toggleAmount(id, 'dec')}>
           <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'>

@@ -1,15 +1,15 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Row, Col, Image, ListGroup, Card, Form, Button } from 'react-bootstrap';
+import { Row, Col, Image, ListGroup, Card, Button } from 'react-bootstrap';
 
 import api from './../api/api';
+import { calcAndFormatPrice } from './../utils/index';
 
 import { Spinner } from '../components/layout';
 import { AddToCartBtn, Message } from '../components';
 
 const Product = ({ setCart, cart }) => {
   const [product, setProduct] = useState(null)
-  const [qty, setQty] = useState(1);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState({
     isError: false,
@@ -26,7 +26,7 @@ const Product = ({ setCart, cart }) => {
         const response = await api.get(`/products/${productId}`);
         setProduct(response.data);
       } catch (error) {
-        console.log(error);
+        console.error(error);
         setError({
           isError: true,
           message: error.message
@@ -40,7 +40,7 @@ const Product = ({ setCart, cart }) => {
   }, [productId]);
 
 
-  const price = product && (product.price * 3.5).toLocaleString('he-IL');
+  const price = product && calcAndFormatPrice(product.price);
 
   return (
     <>

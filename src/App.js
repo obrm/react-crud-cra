@@ -36,7 +36,7 @@ function App() {
         setProducts(response.data);
         setItem('products', response.data);
       } catch (error) {
-        console.log(error);
+        console.error(error);
         setError({
           isError: true,
           message: error.message
@@ -50,7 +50,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    const cartItems = getItem('cartItems');
+    const cartItems = getItem('cart');
     if (cartItems) {
       setCart(cartItems);
     }

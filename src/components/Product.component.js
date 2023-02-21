@@ -1,10 +1,12 @@
 import { Link } from 'react-router-dom';
 import { Card } from 'react-bootstrap';
 
+import { calcAndFormatPrice } from './../utils/index';
+
 import AddToCartBtn from './AddToCartBtn.component'
 
 const Product = ({ product, cart, setCart }) => {
-  const price = (product.price * 3.5).toFixed(0).toLocaleString('he-IL');
+  const price = calcAndFormatPrice(product.price);
 
   return (
     <Card className='my-3 p-3 rounded card-main card-main-sm card-main-md'>

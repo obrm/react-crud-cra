@@ -7,7 +7,6 @@ const AddToCartBtn = ({ disabled, cart, setCart, id }) => {
   const addToCart = () => {
     const products = getItem('products');
     const product = products.find((p) => p.id === id);
-    console.log(id);
     // Check if the product is already in the cart
     const index = cart.findIndex((item) => item.id === product.id);
     if (index !== -1) {
