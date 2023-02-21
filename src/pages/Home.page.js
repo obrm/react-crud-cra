@@ -25,7 +25,7 @@ const Home = () => {
             transformResponse: [
               (data) => {
                 const parsedData = JSON.parse(data);
-                return parsedData.products.slice(0, 5);
+                return parsedData.products.slice(0, 8);
               }
             ]
           }
@@ -56,8 +56,7 @@ const Home = () => {
             {error.message}
         </Message>
       ) : (
-        products
-          .filter((product) => product.published)
+            products
           .map((product) => (
             <Col key={product.id} sm={12} md={6} lg={4} xl={3}>
               <Product product={product} />

@@ -9,7 +9,7 @@ const Product = ({ product }) => {
   return (
     <Card className='my-3 p-3 rounded card-main card-main-sm card-main-md'>
       <Link to={`/product/${product.id}`}>
-        <Card.Img src={product.thumbnail} vatiant='top' alt={product.name} />
+        <Card.Img src={product.thumbnail} variant='top' alt={product.name} style={{ maxHeight: '10rem' }} />
       </Link>
       <Card.Body>
         <Link to={`/product/${product.id}`}>
@@ -28,7 +28,6 @@ const Product = ({ product }) => {
           {price} ש"ח{' '}
           <small>{product.stock === 0 && ` (חסר במלאי)`}</small>
         </Card.Text>
-
         <AddToCartBtn disabled={product.stock === 0} id={product._id} />
       </Card.Body>
     </Card>
