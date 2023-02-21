@@ -98,6 +98,7 @@ function App() {
               } />
             </Route>
 
+            <Route path='not-found' element={<NotFound />} />
             <Route path='*' element={<NotFound />} />
           </Route>
         </Routes>
