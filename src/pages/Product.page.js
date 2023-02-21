@@ -76,7 +76,7 @@ const Product = ({ setCart, cart }) => {
                 <Col md={12}>
                   <Image src={product.thumbnail} alt={product.name} fluid />
                 </Col>
-            <Col md={3}>
+                <Col md={3}>
               <Card>
                 <ListGroup variant='flush'>
                   <ListGroup.Item>
@@ -88,6 +88,8 @@ const Product = ({ setCart, cart }) => {
                             </strong>
                           </Col>
                         </Row>
+                      </ListGroup.Item>
+                      <ListGroup.Item>
                         <Row>
                       <Col>מחיר:</Col>
                       <Col>
