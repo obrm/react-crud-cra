@@ -1,11 +1,20 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Navbar, Nav, Container } from 'react-bootstrap';
+
+import { getItem } from '../services/localStorageService';
 
 import logo from '../assets/images/logo.png';
 
 const Header = () => {
   const [cartItems, setCartItems] = useState([]);
+
+  useEffect(() => {
+    const items = getItem('cartItems');
+    if (items) {
+      setCartItems(items);
+    }
+  }, []);
 
   return (
     <header>
@@ -20,14 +29,12 @@ const Header = () => {
           </Link>
           <Nav className='mr-auto'>
             <Link to='/cart'>
-              <Nav.Link>
                 <i className='fas fa-shopping-cart'></i> עגלת קניות{' '}
                 {cartItems.length > 0 &&
                   `(${cartItems.reduce(
                     (acc, item) => acc + Number(item.qty),
                     0
-                  )})`}
-              </Nav.Link>
+                )})`}
             </Link>
           </Nav>
         </Container>

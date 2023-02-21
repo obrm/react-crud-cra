@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Row, Col, ListGroup, Button } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 
 import api from './../api/api';
 
@@ -9,7 +9,10 @@ import { Spinner } from './../components/layout';
 const Home = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState({
+    isError: false,
+    message: ''
+  });
 
   useEffect(() => {
     const getProducts = async () => {
@@ -27,10 +30,14 @@ const Home = () => {
             ]
           }
         );
-        console.log(response);
-        // setProducts(response.data);
+        console.log(response.data);
+        setProducts(response.data);
       } catch (error) {
-        setError(true);
+        console.log(error);
+        setError({
+          isError: true,
+          message: error.message
+        });
       } finally {
         setLoading(false);
       }
@@ -44,15 +51,15 @@ const Home = () => {
     <Row>
       {loading ? (
         <Spinner />
-      ) : error ? (
+      ) : error.isError ? (
         <Message variant='danger' dismissible={false}>
-          {error}
+            {error.message}
         </Message>
       ) : (
         products
           .filter((product) => product.published)
           .map((product) => (
-            <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
+            <Col key={product.id} sm={12} md={6} lg={4} xl={3}>
               <Product product={product} />
             </Col>
           ))

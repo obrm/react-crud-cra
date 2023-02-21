@@ -8,7 +8,7 @@ const Message = ({ variant, children, classN, dismissible }) => {
     return (
       <Alert
         variant={variant}
-        className={`${classN}`}
+        className={classN}
         onClose={() => setShow(false)}
         dismissible={dismissible}
       >

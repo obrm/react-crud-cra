@@ -1,6 +1,6 @@
 import { Button } from 'react-bootstrap';
 
-const AddToCartBtn = ({ disabled, id, qty }) => {
+const AddToCartBtn = ({ disabled }) => {
   return (
     <Button
       className='btn-block btn-brand'
