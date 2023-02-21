@@ -5,9 +5,21 @@ import { Container } from 'react-bootstrap';
 import api from './api/api';
 import { getItem, setItem } from './services/localStorageService';
 
-import { SharedLayout, Home, Product, EditProduct, AddProduct, Cart, NotFound, SharedProductLayout } from './pages';
+import {
+  SharedLayout,
+  Home,
+  Login,
+  Product,
+  EditProduct,
+  AddProduct,
+  Cart,
+  NotFound,
+  SharedProductLayout,
+  ProtectedRoute
+} from './pages';
 
 function App() {
+  const [user, setUser] = useState(null);
   const [cart, setCart] = useState([]);
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -60,7 +72,7 @@ function App() {
     <Router>
       <Container>
         <Routes>
-          <Route path='/' element={<SharedLayout cart={cart} />}>
+          <Route path='/' element={<SharedLayout cart={cart} user={user} setUser={setUser} />}>
             <Route
               index
               element={<Home
@@ -69,12 +81,21 @@ function App() {
                 setCart={setCart}
                 loading={loading}
                 error={error} />} />
+            <Route path='login' element={<Login user={user} setUser={setUser} />} />
             <Route path='cart' element={<Cart cart={cart} setCart={setCart} products={products} />} />
-            <Route path='/add' element={<AddProduct />} />
+            <Route path='add' element={
+              <ProtectedRoute user={user}>
+                <AddProduct />
+              </ProtectedRoute>
+            } />
 
             <Route path='products' element={<SharedProductLayout />}>
               <Route path=':productId' element={<Product cart={cart} setCart={setCart} />} />
-              <Route path=':productId/edit' element={<EditProduct />} />
+              <Route path=':productId/edit' element={
+                <ProtectedRoute user={user}>
+                  <EditProduct />
+                </ProtectedRoute>
+              } />
             </Route>
 
             <Route path='*' element={<NotFound />} />

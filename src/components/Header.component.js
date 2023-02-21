@@ -1,12 +1,20 @@
-import { Link, NavLink } from 'react-router-dom';
-import { Navbar, Nav, Container } from 'react-bootstrap';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { Navbar, Nav, Container, Dropdown } from 'react-bootstrap';
+
+import { removeItem } from './../services/localStorageService';
 
 import logo from '../assets/images/logo.png';
 
-const Header = ({ cart }) => {
+const Header = ({ cart, user, setUser }) => {
+  const navigate = useNavigate();
+
+  const handleLogOut = () => {
+    removeItem('user');
+    setUser(null);
+  };
 
   return (
-    <header dir="rtl">
+    <header dir='rtl'>
       <Navbar bg='primary' className='navbar-dark' expand='lg' collapseOnSelect>
         <Container>
           <Link to='/'>
@@ -19,22 +27,38 @@ const Header = ({ cart }) => {
           <Nav className='mr-auto'>
             <NavLink
               to='/add'
-              className={({ isActive }) => (isActive && 'is-active')}
+              className={({ isActive }) => isActive && 'is-active'}
             >
               הוספת מוצר
             </NavLink>
             <NavLink
               to='/cart'
-              className={({ isActive }) => (isActive && 'is-active')}
+              className={({ isActive }) => isActive && 'is-active'}
             >
-                <i className='fas fa-shopping-cart'></i> עגלת קניות{' '}
+              <i className='fas fa-shopping-cart'></i> עגלת קניות{' '}
               {cart.length > 0 &&
-                `(${cart.reduce(
-                  (acc, item) => acc + item.qty,
-                    0
-                )})`}
+                `(${cart.reduce((acc, item) => acc + item.qty, 0)})`}
             </NavLink>
           </Nav>
+          {user ? (<Dropdown className='ml-auto'>
+            <Dropdown.Toggle variant='success' id='dropdown-basic'>
+              {user.name}
+            </Dropdown.Toggle>
+
+            <Dropdown.Menu>
+              <Dropdown.Item onClick={handleLogOut}>התנתק</Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>) : (
+            <Dropdown className='ml-auto'>
+              <Dropdown.Toggle variant='success' id='dropdown-basic'>
+                התחברות
+              </Dropdown.Toggle>
+
+              <Dropdown.Menu>
+                <Dropdown.Item onClick={() => navigate('/login')}>התחבר</Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
+          )}
         </Container>
       </Navbar>
     </header>

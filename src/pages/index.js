@@ -7,5 +7,18 @@ import NotFound from './NotFound.page';
 import SharedProductLayout from './SharedProductLayout.page';
 import EditProduct from './EditProduct.page';
 import AddProduct from './AddProduct.page';
+import Login from './Login.page';
+import ProtectedRoute from './ProtectedRoute';
 
-export { Home, Product, AddProduct, EditProduct, Cart, SharedLayout, SharedProductLayout, NotFound };
+export {
+  Login,
+  Home,
+  Product,
+  AddProduct,
+  EditProduct,
+  Cart,
+  SharedLayout,
+  SharedProductLayout,
+  NotFound,
+  ProtectedRoute
+};
