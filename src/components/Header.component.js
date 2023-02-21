@@ -25,12 +25,12 @@ const Header = ({ cart, user, setUser }) => {
             </Navbar.Brand>
           </Link>
           <Nav className='mr-auto'>
-            <NavLink
+            {user && <NavLink
               to='/add'
               className={({ isActive }) => isActive && 'is-active'}
             >
               הוספת מוצר
-            </NavLink>
+            </NavLink>}
             <NavLink
               to='/cart'
               className={({ isActive }) => isActive && 'is-active'}
@@ -39,7 +39,6 @@ const Header = ({ cart, user, setUser }) => {
               {cart.length > 0 &&
                 `(${cart.reduce((acc, item) => acc + item.qty, 0)})`}
             </NavLink>
-          </Nav>
           {user ? (<Dropdown className='ml-auto'>
             <Dropdown.Toggle variant='success' id='dropdown-basic'>
               {user.name}
@@ -58,7 +57,8 @@ const Header = ({ cart, user, setUser }) => {
                 <Dropdown.Item onClick={() => navigate('/login')}>התחבר</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
-          )}
+            )}
+          </Nav>
         </Container>
       </Navbar>
     </header>

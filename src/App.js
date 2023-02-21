@@ -90,7 +90,7 @@ function App() {
             } />
 
             <Route path='products' element={<SharedProductLayout />}>
-              <Route path=':productId' element={<Product cart={cart} setCart={setCart} />} />
+              <Route path=':productId' element={<Product cart={cart} setCart={setCart} user={user} />} />
               <Route path=':productId/edit' element={
                 <ProtectedRoute user={user}>
                   <EditProduct />

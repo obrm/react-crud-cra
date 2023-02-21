@@ -8,7 +8,7 @@ import { calcAndFormatPrice } from './../utils/index';
 import { Spinner } from '../components/layout';
 import { AddToCartBtn, Message } from '../components';
 
-const Product = ({ setCart, cart }) => {
+const Product = ({ setCart, cart, user }) => {
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState({
@@ -114,12 +114,15 @@ const Product = ({ setCart, cart }) => {
                           disabled={product.stock === 0}
                           cart={cart} setCart={setCart} id={product.id} />
                   </ListGroup.Item>
+                      {user && (
+                        <>
                       <ListGroup.Item>
                         <Button variant="danger" onClick={handleDelete}>מחק מוצר</Button>
                       </ListGroup.Item>
                       <ListGroup.Item>
                         <Button onClick={handleEdit}>ערוך מוצר</Button>
                       </ListGroup.Item>
+                        </>)}
                 </ListGroup>
               </Card>
             </Col>
