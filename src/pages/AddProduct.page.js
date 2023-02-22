@@ -55,7 +55,7 @@ const AddProduct = () => {
               <Form.Label>שם המוצר:</Form.Label>
               <Form.Control
                 type='text'
-                name='name'
+                name='title'
                 value={formData.title}
                 onChange={handleChange}
               />
