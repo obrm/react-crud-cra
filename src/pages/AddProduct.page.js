@@ -37,7 +37,7 @@ const AddProduct = () => {
       console.error(error);
       setError({
         isError: true,
-        message: error.message
+        message: error.response.data.message
       });
     }
   };

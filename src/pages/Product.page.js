@@ -29,7 +29,7 @@ const Product = ({ setCart, cart, user }) => {
         console.error(error);
         setError({
           isError: true,
-          message: error.message
+          message: error.response.data.message
         });
       } finally {
         setLoading(false);
@@ -47,7 +47,7 @@ const Product = ({ setCart, cart, user }) => {
       console.error(error);
       setError({
         isError: true,
-        message: error.message
+        message: error.response.data.message
       });
     }
   };

@@ -41,7 +41,7 @@ const EditProduct = () => {
         console.error(error);
         setError({
           isError: true,
-          message: error.message
+          message: error.response.data.message
         });
       } finally {
         setLoading(false);
@@ -72,7 +72,7 @@ const EditProduct = () => {
       console.error(error);
       setError({
         isError: true,
-        message: error.message
+        message: error.response.data.message
       });
     }
   };
