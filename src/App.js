@@ -68,6 +68,13 @@ function App() {
     }
   }, []);
 
+  useEffect(() => {
+    const userData = getItem('user');
+    if (userData) {
+      setUser(userData);
+    }
+  }, []);
+
   return (
     <Router>
       <Container>

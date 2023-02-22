@@ -117,10 +117,10 @@ const Product = ({ setCart, cart, user }) => {
                       {user && (
                         <>
                       <ListGroup.Item>
-                        <Button variant="danger" onClick={handleDelete}>מחק מוצר</Button>
+                            <Button onClick={handleEdit}>ערוך מוצר</Button>
                       </ListGroup.Item>
                       <ListGroup.Item>
-                        <Button onClick={handleEdit}>ערוך מוצר</Button>
+                            <Button variant="danger" onClick={handleDelete}>מחק מוצר</Button>
                       </ListGroup.Item>
                         </>)}
                 </ListGroup>

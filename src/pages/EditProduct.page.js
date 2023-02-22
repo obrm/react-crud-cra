@@ -91,7 +91,7 @@ const EditProduct = () => {
 
   return (
     <>
-      <Button onClick={() => navigate('/')} className='mb-3'>
+      <Button onClick={() => navigate(`/products/${product.id}`)} className='mb-3'>
         חזרה
       </Button>
 
@@ -102,8 +102,8 @@ const EditProduct = () => {
               <Form.Label>שם המוצר:</Form.Label>
               <Form.Control
                 type='text'
-                name='name'
-                value={formData.name}
+                name='title'
+                value={formData.title}
                 onChange={handleChange}
               />
             </Form.Group>
