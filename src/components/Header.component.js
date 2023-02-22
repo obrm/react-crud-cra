@@ -14,7 +14,7 @@ const Header = ({ cart, user, setUser }) => {
   };
 
   return (
-    <header dir='rtl'>
+    <header>
       <Navbar bg='primary' className='navbar-dark' expand='lg' collapseOnSelect>
         <Container>
           <Link to='/'>
