@@ -27,13 +27,13 @@ const Header = ({ cart, user, setUser }) => {
           <Nav className='mr-auto'>
             {user && <NavLink
               to='/add'
-              className={({ isActive }) => isActive && 'is-active'}
+              className={({ isActive }) => isActive ? 'is-active' : undefined}
             >
               הוספת מוצר
             </NavLink>}
             <NavLink
               to='/cart'
-              className={({ isActive }) => isActive && 'is-active'}
+              className={({ isActive }) => isActive ? 'is-active' : undefined}
             >
               <i className='fas fa-shopping-cart'></i> עגלת קניות{' '}
               {cart.length > 0 &&
