@@ -9,7 +9,7 @@ const Cart = ({ cart, setCart }) => {
     setItem('cart', []);
   };
 
-  let total = cart && cart.map((product) => product.price * product.qty).reduce((acc, cur) => acc + cur, 0); 
+  let total = cart.map((product) => product.price * product.qty).reduce((acc, cur) => acc + cur, 0); 
 
   total = calcAndFormatPrice(total);
 
