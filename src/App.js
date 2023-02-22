@@ -63,14 +63,14 @@ function App() {
 
   useEffect(() => {
     const cartItems = getItem('cart');
-    if (cartItems) {
+    if (cartItems.length !== 0) {
       setCart(cartItems);
     }
   }, []);
 
   useEffect(() => {
     const userData = getItem('user');
-    if (userData) {
+    if (userData.length !== 0) {
       setUser(userData);
     }
   }, []);
